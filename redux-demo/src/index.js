@@ -8,6 +8,7 @@ import resultReducer from './store/reducers/result';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+import thunk from 'redux-thunk';
 
 const rootReducer = combineReducers({
     ctr: counterReducer,
@@ -30,8 +31,9 @@ const logger = (store) => {
     }
 }
 
+// using this compose to write middlewares stack out the chrome redux-devTools
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(logger)));
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(logger, thunk)));
 
 ReactDOM.render(
     <Provider store={store}>
