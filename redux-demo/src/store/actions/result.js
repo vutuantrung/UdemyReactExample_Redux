@@ -11,8 +11,10 @@ export const saveResult = (res) => {
 export const storeResult = (res) => {
     // Normally, we have to return a javascript object which contains the action
     // But with redux-thunk, we can return an async/sync function => difference!
-    return (dispatch) => {
+    return (dispatch, getState) => {
         setTimeout(() => {
+            const oldCounter = getState().ctr.counter;
+            console.log(oldCounter);
             dispatch(saveResult(res));
         }, 2000);
     }
